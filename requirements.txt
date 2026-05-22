@@ -1,0 +1,22 @@
+# core
+numpy>=1.24,<2.0
+scipy>=1.10
+opencv-python>=4.8
+pillow>=10.0
+tqdm>=4.66
+
+# pytorch (install matching CUDA version separately, this is just the API surface)
+torch>=2.0
+torchvision>=0.15
+
+# foundation-model APIs
+timm>=0.9          # used by Depth Anything V2 and some torch.hub models
+huggingface_hub>=0.20
+safetensors>=0.4
+
+# matlab .mat files (SQUID distanceFromCamera)
+scipy>=1.10        # scipy.io.loadmat
+h5py>=3.10         # for v7.3 .mat files
+
+# UniDepth V2 (pip-installable; pulls its own deps)
+# unidepth>=2.0    # uncomment if you go with pip-install; otherwise clone repo
