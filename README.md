@@ -8,9 +8,7 @@ If you use this code, please cite the paper:
 
 ```
 @article{...,
-  title  = {An Experimental Review of Depth Estimation Techniques for
-            Underwater Vision: From Classical Priors to Vision Transformer
-            Foundations},
+  title  = {An Experimental Review of Monocular Underwater Depth Estimation},
   author = {Abhijit Boruah and Nayan M. Kakoty and Debajit Sarma},
   journal= {IEEE Trans. Computational Imaging},
   year   = {2026}
