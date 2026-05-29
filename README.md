@@ -10,7 +10,7 @@ If you use this code, please cite the paper:
 @article{...,
   title  = {An Experimental Review of Monocular Underwater Depth Estimation},
   author = {Abhijit Boruah and Nayan M. Kakoty and Debajit Sarma},
-  journal= {IEEE Trans. on Instrumentation and Measurement},
+  journal= {IEEE Trans. on Vehicular Technology},
   year   = {2026}
 }
 ```
