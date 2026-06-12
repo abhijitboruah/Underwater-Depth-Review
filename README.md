@@ -8,10 +8,9 @@ If you use this code, please cite the paper:
 
 ```
 @article{...,
-  title  = {Monocular Depth Estimation for Autonomous Underwater Vehicles:
-An Experimental Review and a Physics-Aware Evaluation Metric},
+  title  = {An Experimental Review of Monocular Underwater Depth Estimation: Accuracy-Efficiency Tradeoffs and a Physics-Aware Evaluation Metric},
   author = {Abhijit Boruah and Nayan M. Kakoty and Debajit Sarma},
-  journal= {IEEE Trans. on Vehicular Technology},
+  journal= {IEEE Transactions on Circuits and Systems for Video Technology.}(Under Review),
   year   = {2026}
 }
 ```
