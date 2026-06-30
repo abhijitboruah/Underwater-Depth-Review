@@ -10,7 +10,7 @@ If you use this code, please cite the paper:
 @article{...,
   title  = {An Experimental Review of Monocular Underwater Depth Estimation: Accuracy-Efficiency Tradeoffs and a Physics-Aware Evaluation Metric},
   author = {Abhijit Boruah and Nayan M. Kakoty and Debajit Sarma},
-  journal= {IEEE Transactions on Circuits and Systems for Video Technology.}(Under Review),
+  journal= {Neurocomputing}(Under Review),
   year   = {2026}
 }
 ```
