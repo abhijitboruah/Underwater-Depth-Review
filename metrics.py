@@ -1,19 +1,10 @@
 """
 Standard depth metrics + the proposed UDAC metric.
 
-Reference metrics follow Eigen et al. NeurIPS 2014 conventions:
-  - AbsRel, SqRel, RMSE, RMSE-log, SILog, delta_1/2/3
-
-UDAC (Underwater Depth-Attenuation Consistency) is the Pearson correlation
-between the per-pixel near-ness signal v(x) = R/(R+G+B+eps) and a min-max
-normalised inverted prediction n_hat. Scale-invariant by construction;
-requires no ground-truth depth.
 """
 
 import numpy as np
 
-
-# Small epsilons to keep things sane
 EPS = 1e-6
 
 
@@ -80,19 +71,7 @@ def reference_metrics(pred, gt, mask=None):
 # -------------------------------------------------------------------
 
 def near_ness_signal(rgb_image):
-    """Per-pixel near-ness from the RGB image.
-
-    v(x) = R(x) / (R(x) + G(x) + B(x) + eps)
-
-    Higher v corresponds to redder pixels, which (by the underwater
-    image-formation model) are physically nearer in expectation.
-
-    Note: an earlier version of this used a thresholded "red dominance"
-    test (1 if R > G and R > B, else 0). That signal saturates to ~0
-    on most FLSea images where the red channel is already smaller than
-    G+B everywhere. The fractional form below preserves dynamic range
-    on those images.
-    """
+    
     R = rgb_image[..., 0]
     G = rgb_image[..., 1]
     B = rgb_image[..., 2]
@@ -114,14 +93,6 @@ def normalised_near_ness(pred):
 
 def udac(rgb_image, pred):
     """Compute UDAC for one image.
-
-    Returns the Pearson correlation between v(x) and n_hat(x) over
-    pixels where both are well-defined. The aggregator over the dataset
-    is the simple mean (see aggregate_udac).
-
-    Returns:
-        float in [-1, 1], or NaN if the correlation is undefined
-        (one of the signals has zero variance).
     """
     v = near_ness_signal(rgb_image)
     n = normalised_near_ness(pred)
@@ -144,11 +115,7 @@ def udac(rgb_image, pred):
 # -------------------------------------------------------------------
 
 def aggregate(per_image_results):
-    """Mean over per-image metric dicts, ignoring NaNs.
-
-    Also reports the standard deviation per metric (helpful for noting
-    method variability across the dataset).
-    """
+   
     if not per_image_results:
         return {}
 
