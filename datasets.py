@@ -1,10 +1,5 @@
 """
 Dataset loaders for FLSea and SQUID.
-
-Both follow a simple iterator protocol: yield (image_id, rgb, gt_depth) tuples.
-RGB is float32 in [0,1], depth is float32 in metres (NaN for invalid).
-
-Edit DATA_ROOT below to point at your data.
 """
 
 import os
@@ -21,9 +16,9 @@ DATA_ROOT = os.environ.get(
 )
 
 
-# -------------------------------------------------------------------
+
 # FLSea
-# -------------------------------------------------------------------
+
 
 # Sub-collections we use (per Cai & Metzler 2025)
 FLSEA_CANYONS = ['u_canyon', 'flatiron']
@@ -41,9 +36,7 @@ def _flsea_scene_paths(group, scene):
 
 
 def _flsea_depth_path(img_path, depth_dir):
-    """FLSea depth files use a '<stem>_SeaErra_abs_depth.tif' suffix
-    rather than matching the image name directly. This took a while
-    to figure out -- the original release notes don't mention it."""
+    
     stem = os.path.splitext(os.path.basename(img_path))[0]
     return os.path.join(depth_dir, f'{stem}_SeaErra_abs_depth.tif')
 
@@ -73,7 +66,7 @@ def iter_flsea(group='all'):
             continue
 
         # Image files: any .tif/.tiff/.jpg in imgs/
-        # (the FLSea release uses .tiff; we accept .tif too just in case)
+        
         patterns = ['*.tiff', '*.tif', '*.jpg', '*.png']
         img_paths = []
         for p in patterns:
@@ -100,17 +93,14 @@ def iter_flsea(group='all'):
             yield image_id, rgb, depth
 
 
-# -------------------------------------------------------------------
 # SQUID
-# -------------------------------------------------------------------
+
 
 SQUID_SITES = ['Satil', 'Nachsolim', 'Katzaa', 'Michmoret']
 
 
 def _load_mat_depth(path):
-    """Load SQUID's distanceFromCamera.mat. The variable name inside the
-    file isn't always 'distanceFromCamera' -- some scenes have it under
-    other names. We grab the first 2D float array we find."""
+    
     mat = loadmat(path)
     for key, val in mat.items():
         if key.startswith('__'):
@@ -122,15 +112,7 @@ def _load_mat_depth(path):
 
 
 def iter_squid():
-    """Iterate SQUID stereo pairs (left image only).
-
-    Each `image_set_NN` folder contains rectified left/right TIFFs and a
-    distanceFromCamera.mat. We use the left image as the monocular input
-    and the .mat as the ground-truth depth.
-
-    Yields:
-        (image_id, rgb_float32, depth_metres)
-    """
+    
     root = os.path.join(DATA_ROOT, 'squid')
 
     for site in SQUID_SITES:
@@ -145,8 +127,7 @@ def iter_squid():
 
         for scene in scene_dirs:
             sd = os.path.join(site_dir, scene)
-            # Left image -- naming varies a bit across the four sites,
-            # so we match by 'LFT' and 'resizedUndistort' substrings.
+            
             lefts = [f for f in os.listdir(sd)
                      if 'LFT' in f and 'resizedUndistort' in f
                      and f.endswith(('.tif', '.tiff'))]
@@ -172,9 +153,6 @@ def iter_squid():
             yield image_id, rgb, depth
 
 
-# -------------------------------------------------------------------
-# Convenience
-# -------------------------------------------------------------------
 
 def get_dataset(name):
     """Return an iterator for the named dataset."""
