@@ -1,13 +1,6 @@
 """
 Per-image least-squares scale-shift alignment.
 
-All methods except UniDepth V2 produce relative depth (inverse depth,
-scale-and-shift-invariant disparity, normalised depth). To compute
-reference-based metrics like AbsRel and RMSE, we fit (s, t) per image
-that minimise || s * pred + t - gt ||_2 over valid GT pixels.
-
-This is the convention adopted across the contemporary depth literature
-(e.g. MiDaS Ranftl 2020, DPT 2021, Depth Anything 2024).
 """
 
 import numpy as np
