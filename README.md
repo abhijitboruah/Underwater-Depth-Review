@@ -15,7 +15,7 @@ If you use this code, please cite the paper:
 @article{boruah2026benchmarking,
   title  = {Benchmarking Monocular Underwater Depth Estimation:
             Datasets, Methods, and Evaluation Metrics},
-  author = {Abhijit Boruah and Nayan M. Kakoty and Debajit Sarma},
+  author = {Abhijit Boruah et. al},
   journal= {International Journal of Computer Vision (under review)},
   year   = {2026}
 }
